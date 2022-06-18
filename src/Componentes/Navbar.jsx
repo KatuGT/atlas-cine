@@ -1,14 +1,66 @@
-import React from 'react'
 import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
+const Header = styled.header`
+  padding: 0 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(240, 248, 255);
+
+  @media screen and (min-width: 980px) {
+  justify-content: space-around;
+    
+  }
+`;
+
+const Logo = styled.div`
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  & .fa-ticket {
+    font-size: 1.5em;
+  }
+`;
+
+const LogoText = styled.h2`
+  margin: 0;
+`;
+
+const Nav = styled.nav`
+  margin: 0;
+  padding: 1em;
+`;
+
+const NavList = styled.ul`
+  list-style: none;
+  margin: 0;
+`;
+const NavItem = styled.li`
+  & a {
+    text-decoration: none;
+    padding: 1em;
+  }
+`;
 const Navbar = () => {
   return (
-    <div>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="pelicula">Pelicula</NavLink>
+    <Header>
+      <Logo>
+        <i className="fa-solid fa-ticket"></i>
+        <LogoText>Atlas</LogoText>
+      </Logo>
+      <Nav>
+        <NavList>
+          <NavItem>
+            <NavLink to="/">Home</NavLink>
+          </NavItem>
+        </NavList>
+      </Nav>
+    </Header>
+  );
+};
 
-    </div>
-  )
-}
-
-export default Navbar
+export default Navbar;
