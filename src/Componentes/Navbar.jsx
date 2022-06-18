@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-const Header = styled.header`
+const WrapperNav = styled.div`
   padding: 0 2em;
   display: flex;
   justify-content: space-between;
@@ -47,7 +47,7 @@ const NavItem = styled.li`
 `;
 const Navbar = () => {
   return (
-    <Header>
+    <WrapperNav>
       <Logo>
         <i className="fa-solid fa-ticket"></i>
         <LogoText>Atlas</LogoText>
@@ -59,7 +59,7 @@ const Navbar = () => {
           </NavItem>
         </NavList>
       </Nav>
-    </Header>
+    </WrapperNav>
   );
 };
 
