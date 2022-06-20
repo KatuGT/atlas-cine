@@ -34,23 +34,33 @@ const CabezeraTopPelis = styled.div`
     font-size: 1.2em;
     font-weight: 700;
   }
+  @media screen and (min-width: 600px) {
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 const TextoTopPelis = styled.div`
   display: flex;
   gap: 0.5em;
   order: 1;
-`;
-
-const WrapperSearchbar = styled.div`
-  display: flex;
+  @media screen and (min-width: 600px){
+    order: 0;
+  }
 `;
 
 const SearchBar = styled.input`
   border-radius: 1em;
-  padding: 1em;
+  padding: 1em;  
   margin-bottom: 1em;
   order: 0;
+  @media screen and (min-width: 600px){
+  margin-bottom: 0;
+  }
+
+  @media screen and (min-width: 600px){
+    order: 1;
+  }
 `;
 
 const ListaPelis = styled.div`
@@ -112,7 +122,7 @@ const Home = () => {
           </TextoTopPelis>
           <SearchBar
             type="search"
-            placeholder="Busca aqui..."
+            placeholder="Busca aqui... "
             onChange={(e) => setQuery(e.target.value.toLocaleLowerCase())}
           />
         </CabezeraTopPelis>
