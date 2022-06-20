@@ -97,6 +97,9 @@ const Home = () => {
   const [topPeliculas, setTopPeliculas] = useState([]);
   const [query, setQuery] = useState("");
 
+  // STAR RATING
+  const [rating, setRating] = useState(null);
+
   useEffect(() => {
     try {
       axios
@@ -113,9 +116,6 @@ const Home = () => {
     }
   }, [query]);
 
-  // STAR RATING
-  const [rating, setRating] = useState(null);
-  console.log(rating * 2);
   return (
     <>
       <Header />
@@ -128,7 +128,7 @@ const Home = () => {
                 type="radio"
                 name="star"
                 value={valorRating}
-                onClick={() => setRating(valorRating)}
+                onClick={() => (valorRating !== rating) ? setRating(valorRating) :setRating (null) }
               />
 
               <IconoStrella
@@ -162,19 +162,25 @@ const Home = () => {
         </CabezeraTopPelis>
 
         <ListaPelis>
-          {topPeliculas?.map((pelicula, index) => (
-            <>
-              {pelicula?.vote_average <= rating * 2 ? (
-                <Poster poster_path={pelicula?.poster_path} key={index} />
-              ) : (
-                ""
-              )}
-              {console.log(
-                pelicula?.vote_average <= rating * 2 ? pelicula : ""
-              )}
-              {/* <Poster poster_path={pelicula?.poster_path} key={index} /> */}
-            </>
-          ))}
+          {topPeliculas?.map((pelicula, index) =>
+            rating ? (
+              <>
+                {pelicula?.vote_average <= rating * 2 ? (
+                  <Poster
+                    poster_path={pelicula?.poster_path}
+                    key={index * Math.random()}
+                  />
+                ) : (
+                  ""
+                )}
+              </>
+            ) : (
+              <Poster
+                poster_path={pelicula?.poster_path}
+                key={index * Math.random()}
+              />
+            )
+          )}
         </ListaPelis>
       </WrapperSectionTopPelis>
     </>
