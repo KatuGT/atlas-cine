@@ -19,6 +19,7 @@ const CabezeraTopPelis = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1em;
 
   & .fa-fire-flame-curved,
   & p {
@@ -41,9 +42,10 @@ const CabezeraTopPelis = styled.div`
 `;
 
 const TextoTopPelis = styled.div`
+  font-size: 1.5em;
   display: flex;
   gap: 0.5em;
-  order: 1;
+  order: 3;
   @media screen and (min-width: 600px) {
     order: 0;
   }
@@ -52,15 +54,38 @@ const TextoTopPelis = styled.div`
 const SearchBar = styled.input`
   border-radius: 1em;
   padding: 1em;
-  margin-bottom: 1em;
   order: 0;
   @media screen and (min-width: 600px) {
     margin-bottom: 0;
+    order: 2;
+  }
+`;
+
+const WrapperRatingFilter = styled.div`
+  display: flex;
+  align-items: center;
+  order: 2;
+  gap: 0.5em;
+
+  & p {
+    font-weight: normal;
   }
 
   @media screen and (min-width: 600px) {
     order: 1;
   }
+`;
+
+const WrapperStrellas = styled.div``;
+
+const IconoStrella = styled.i`
+  font-size: 1.5em;
+  cursor: pointer;
+  color: ${(props) => (props.color ? "#dfbc0d" : "#cbcbcb")};
+`;
+
+const InputRadio = styled.input`
+  display: none;
 `;
 
 const ListaPelis = styled.div`
@@ -81,24 +106,13 @@ const ListaPelis = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
-
-const WrapperRatingFilter = styled.div``;
-
-const IconoStrella = styled.i`
-  font-size: 4em;
-  cursor: pointer;
-  color: ${(props) => (props.color ? "#dfbc0d" : "#cbcbcb")};
-`;
-
-const InputRadio = styled.input`
-  display: none;
-`;
 const Home = () => {
   const [topPeliculas, setTopPeliculas] = useState([]);
   const [query, setQuery] = useState("");
 
   // STAR RATING
   const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null)
 
   useEffect(() => {
     try {
@@ -106,7 +120,7 @@ const Home = () => {
         .get(
           !query
             ? `https://api.themoviedb.org/3/discover/movie?api_key=23413c6b6dad4437049b94c075c35690&sort_by=popularity.desc`
-            : `https://api.themoviedb.org/3/search/movie?api_key=23413c6b6dad4437049b94c075c35690&language=en-US&page=1&include_adult=false&query=${query}`
+            : `https://api.themoviedb.org/3/search/movie?api_key=23413c6b6dad4437049b94c075c35690&page=1&include_adult=false&query=${query}`
         )
         .then((res) => {
           setTopPeliculas(res.data.results);
@@ -119,26 +133,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <WrapperRatingFilter>
-        {[...Array(5)].map((star, i) => {
-          const valorRating = i + 1;
-          return (
-            <label key={i}>
-              <InputRadio
-                type="radio"
-                name="star"
-                value={valorRating}
-                onClick={() => (valorRating !== rating) ? setRating(valorRating) :setRating (null) }
-              />
 
-              <IconoStrella
-                className="fa-solid fa-star"
-                color={valorRating <= rating ? "yellow" : ""}
-              ></IconoStrella>
-            </label>
-          );
-        })}
-      </WrapperRatingFilter>
       <WrapperSectionTopPelis>
         <CabezeraTopPelis>
           <TextoTopPelis>
@@ -154,6 +149,35 @@ const Home = () => {
               </>
             )}
           </TextoTopPelis>
+          <WrapperRatingFilter>
+            <p>Rating:</p>
+            <WrapperStrellas>
+              {[...Array(5)].map((star, i) => {
+                const valorRating = i + 1;
+                return (
+                  <label key={i}>
+                    <InputRadio
+                      type="radio"
+                      name="star"
+                      value={valorRating}
+                      onClick={() =>
+                        valorRating !== rating
+                          ? setRating(valorRating)
+                          : setRating(null)
+                      }
+                    />
+
+                    <IconoStrella
+                      className="fa-solid fa-star"
+                      color={valorRating <= ( hover || rating) ? "yellow" : ""}
+                      onMouseEnter={() => setHover(valorRating)}
+                      onMouseLeave={() => setHover(null)}
+                    ></IconoStrella>
+                  </label>
+                );
+              })}
+            </WrapperStrellas>
+          </WrapperRatingFilter>
           <SearchBar
             type="search"
             placeholder="Busca aqui... "
