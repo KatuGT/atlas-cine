@@ -14,17 +14,19 @@ const WrapperSectionTopPelis = styled.section`
 `;
 
 const CabezeraTopPelis = styled.div`
+  width: 95%;
   margin-bottom: 0.2em;
-  margin-left: 1em;
   display: flex;
-  gap: 0.5em;
+  flex-direction: column;
+  justify-content: space-between;
 
   & .fa-fire-flame-curved,
   & p {
     margin: 0;
   }
 
-  & .fa-fire-flame-curved {
+  & .fa-fire-flame-curved,
+  & .fa-magnifying-glass {
     color: #fea130;
   }
 
@@ -33,6 +35,24 @@ const CabezeraTopPelis = styled.div`
     font-weight: 700;
   }
 `;
+
+const TextoTopPelis = styled.div`
+  display: flex;
+  gap: 0.5em;
+  order: 1;
+`;
+
+const WrapperSearchbar = styled.div`
+  display: flex;
+`;
+
+const SearchBar = styled.input`
+  border-radius: 1em;
+  padding: 1em;
+  margin-bottom: 1em;
+  order: 0;
+`;
+
 const ListaPelis = styled.div`
   width: 100%;
   padding: 1em 0;
@@ -54,12 +74,15 @@ const ListaPelis = styled.div`
 
 const Home = () => {
   const [topPeliculas, setTopPeliculas] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     try {
       axios
         .get(
-          `https://api.themoviedb.org/3/discover/movie?api_key=23413c6b6dad4437049b94c075c35690&sort_by=popularity.desc`
+          !query
+            ? `https://api.themoviedb.org/3/discover/movie?api_key=23413c6b6dad4437049b94c075c35690&sort_by=popularity.desc`
+            : `https://api.themoviedb.org/3/search/movie?api_key=23413c6b6dad4437049b94c075c35690&language=en-US&page=1&include_adult=false&query=${query}`
         )
         .then((res) => {
           setTopPeliculas(res.data.results);
@@ -67,20 +90,35 @@ const Home = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
-  console.log(topPeliculas.slice(0, 9));
+  }, [query]);
   return (
     <>
       <Header />
 
       <WrapperSectionTopPelis>
         <CabezeraTopPelis>
-          <i className="fa-solid fa-fire-flame-curved"></i>
-          <p>Películas pupulares</p>
+          <TextoTopPelis>
+            {!query ? (
+              <>
+                <i className="fa-solid fa-fire-flame-curved"></i>
+                <p>Películas pupulares</p>{" "}
+              </>
+            ) : (
+              <>
+                <i className="fa-solid fa-magnifying-glass"></i>
+                <p>Resultado de Busqueda</p>
+              </>
+            )}
+          </TextoTopPelis>
+          <SearchBar
+            type="search"
+            placeholder="Busca aqui..."
+            onChange={(e) => setQuery(e.target.value.toLocaleLowerCase())}
+          />
         </CabezeraTopPelis>
 
         <ListaPelis>
-          {topPeliculas?.slice(0, 9).map((pelicula, index) => (
+          {topPeliculas?.map((pelicula, index) => (
             <Poster poster_path={pelicula?.poster_path} key={index} />
           ))}
         </ListaPelis>

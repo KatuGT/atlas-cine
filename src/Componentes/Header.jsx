@@ -12,7 +12,11 @@ const ImagenHeader = styled.img`
   object-position: top right;
 `;
 
+
+
 const Header = () => {
+
+
   return (
     <WrapperHeader>
       <ImagenHeader src={imgHeader} alt="The Boys" />
