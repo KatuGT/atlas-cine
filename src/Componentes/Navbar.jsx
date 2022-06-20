@@ -2,7 +2,9 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const WrapperNav = styled.div`
-  padding: 0 2em;
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +18,7 @@ const WrapperNav = styled.div`
 
 const Logo = styled.div`
   padding: 0;
-  margin: 0;
+  margin: 0   0 0 1.5em;
   cursor: default;
   display: flex;
   align-items: center;

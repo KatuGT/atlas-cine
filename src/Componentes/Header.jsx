@@ -9,7 +9,7 @@ const ImagenHeader = styled.img`
   height: 100%;
   width: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: top right;
 `;
 
 const Header = () => {
