@@ -44,21 +44,21 @@ const TextoTopPelis = styled.div`
   display: flex;
   gap: 0.5em;
   order: 1;
-  @media screen and (min-width: 600px){
+  @media screen and (min-width: 600px) {
     order: 0;
   }
 `;
 
 const SearchBar = styled.input`
   border-radius: 1em;
-  padding: 1em;  
+  padding: 1em;
   margin-bottom: 1em;
   order: 0;
-  @media screen and (min-width: 600px){
-  margin-bottom: 0;
+  @media screen and (min-width: 600px) {
+    margin-bottom: 0;
   }
 
-  @media screen and (min-width: 600px){
+  @media screen and (min-width: 600px) {
     order: 1;
   }
 `;
@@ -82,6 +82,17 @@ const ListaPelis = styled.div`
   }
 `;
 
+const WrapperRatingFilter = styled.div``;
+
+const IconoStrella = styled.i`
+  font-size: 4em;
+  cursor: pointer;
+  color: ${(props) => (props.color ? "#dfbc0d" : "#cbcbcb")};
+`;
+
+const InputRadio = styled.input`
+  display: none;
+`;
 const Home = () => {
   const [topPeliculas, setTopPeliculas] = useState([]);
   const [query, setQuery] = useState("");
@@ -101,17 +112,40 @@ const Home = () => {
       console.log(error);
     }
   }, [query]);
+
+  // STAR RATING
+  const [rating, setRating] = useState(null);
+  console.log(rating * 2);
   return (
     <>
       <Header />
+      <WrapperRatingFilter>
+        {[...Array(5)].map((star, i) => {
+          const valorRating = i + 1;
+          return (
+            <label key={i}>
+              <InputRadio
+                type="radio"
+                name="star"
+                value={valorRating}
+                onClick={() => setRating(valorRating)}
+              />
 
+              <IconoStrella
+                className="fa-solid fa-star"
+                color={valorRating <= rating ? "yellow" : ""}
+              ></IconoStrella>
+            </label>
+          );
+        })}
+      </WrapperRatingFilter>
       <WrapperSectionTopPelis>
         <CabezeraTopPelis>
           <TextoTopPelis>
             {!query ? (
               <>
                 <i className="fa-solid fa-fire-flame-curved"></i>
-                <p>Películas pupulares</p>{" "}
+                <p>Películas pupulares</p>
               </>
             ) : (
               <>
@@ -129,7 +163,17 @@ const Home = () => {
 
         <ListaPelis>
           {topPeliculas?.map((pelicula, index) => (
-            <Poster poster_path={pelicula?.poster_path} key={index} />
+            <>
+              {pelicula?.vote_average <= rating * 2 ? (
+                <Poster poster_path={pelicula?.poster_path} key={index} />
+              ) : (
+                ""
+              )}
+              {console.log(
+                pelicula?.vote_average <= rating * 2 ? pelicula : ""
+              )}
+              {/* <Poster poster_path={pelicula?.poster_path} key={index} /> */}
+            </>
           ))}
         </ListaPelis>
       </WrapperSectionTopPelis>
