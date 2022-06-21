@@ -109,7 +109,6 @@ const ListaPelis = styled.div`
 const Home = () => {
   const [topPeliculas, setTopPeliculas] = useState([]);
   const [query, setQuery] = useState("");
-
   // STAR RATING
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null)
@@ -191,6 +190,7 @@ const Home = () => {
               <>
                 {pelicula?.vote_average <= rating * 2 ? (
                   <Poster
+                    id={pelicula?.id}
                     poster_path={pelicula?.poster_path}
                     key={index * Math.random()}
                   />
@@ -200,6 +200,8 @@ const Home = () => {
               </>
             ) : (
               <Poster
+              id={pelicula?.id}
+
                 poster_path={pelicula?.poster_path}
                 key={index * Math.random()}
               />

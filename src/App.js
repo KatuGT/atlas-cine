@@ -17,7 +17,7 @@ function App() {
      <Navbar/>
       <Routes>
         <Route path="/" index element={<Home />}/>
-        <Route path="pelicula" element={<Pelicula />}/>
+        <Route path="pelicula/:id" element={<Pelicula />}/>
       </Routes>
      <Footer/>
      </Router>
