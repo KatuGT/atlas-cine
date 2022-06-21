@@ -8,7 +8,7 @@ const WrapperNav = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(240, 248, 255);
+  background-color: #fea130;
 
   @media screen and (min-width: 980px) {
   justify-content: space-around;
@@ -30,6 +30,7 @@ const Logo = styled.div`
 
 const LogoText = styled.h2`
   margin: 0;
+  color: black;
 `;
 
 const Nav = styled.nav`
@@ -45,6 +46,11 @@ const NavItem = styled.li`
   & a {
     text-decoration: none;
     padding: 1em;
+    color: #000;
+  }
+
+  & a:hover{
+    font-weight: bold;
   }
 `;
 const Navbar = () => {
