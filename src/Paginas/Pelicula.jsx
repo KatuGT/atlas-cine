@@ -2,11 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import Cargando from "../Imagenes/Cargando.svg"
 
 const WrapperInfoPeli = styled.div`
-display: flex;
-align-items: center;
-flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   margin-top: 3em;
   width: 100%;
 `;
@@ -27,7 +28,7 @@ const WrapperDatos = styled.article`
     display: flex;
   }
 
-  @media screen and (min-width: 1500px){
+  @media screen and (min-width: 1500px) {
     width: 60%;
     display: flex;
     margin: 0;
@@ -124,12 +125,14 @@ const Pelicula = () => {
   return (
     <>
       <WrapperInfoPeli>
-        <ImagenPortada
-          src={`https://image.tmdb.org/t/p/original/${pelicula.backdrop_path}`}
-        />
+        {pelicula?.backdrop_path && (
+          <ImagenPortada
+            src={`https://image.tmdb.org/t/p/original/${pelicula?.backdrop_path}` || Cargando}
+          />
+        )}
         <WrapperDatos>
           <ImagePoster
-            src={`https://image.tmdb.org/t/p/original/${pelicula.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original/${pelicula?.poster_path || Cargando}`}
           />
           <Datos>
             <WrapperGeneros>
