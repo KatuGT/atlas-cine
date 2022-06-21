@@ -4,18 +4,41 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const WrapperInfoPeli = styled.div`
+display: flex;
+align-items: center;
+flex-direction: column;
   margin-top: 3em;
+  width: 100%;
 `;
 
 const ImagenPortada = styled.img`
   display: none;
   width: 100%;
+
+  @media screen and (min-width: 900px) {
+    display: block;
+    margin-bottom: 4em;
+  }
 `;
 
-const WrapperDatos = styled.article``;
+const WrapperDatos = styled.article`
+  @media screen and (min-width: 900px) {
+    width: 100%;
+    display: flex;
+  }
+
+  @media screen and (min-width: 1500px){
+    width: 60%;
+    display: flex;
+    margin: 0;
+  }
+`;
 
 const ImagePoster = styled.img`
   width: 100%;
+  @media screen and (min-width: 900px) {
+    width: 50%;
+  }
 `;
 
 const Datos = styled.div`
@@ -26,6 +49,9 @@ const WrapperGeneros = styled.section`
   display: flex;
   gap: 0.5em;
   justify-content: center;
+  @media screen and (min-width: 900px) {
+    justify-content: start;
+  }
 `;
 
 const Genero = styled.p`
@@ -34,6 +60,9 @@ const Genero = styled.p`
   border: 1px solid #e2e2e2;
   border-radius: 100vh;
   color: #181818;
+  @media screen and (min-width: 900px) {
+    margin: 0 0 1em 0;
+  }
 `;
 
 const Titulo = styled.h2`
@@ -63,6 +92,16 @@ const Rating = styled.div`
 
 const Budget = styled.p`
   font-weight: bold;
+`;
+
+const Revenue = styled.p`
+  font-weight: bold;
+`;
+
+const Companias = styled.div`
+  & p {
+    font-weight: bold;
+  }
 `;
 
 const Pelicula = () => {
@@ -109,7 +148,16 @@ const Pelicula = () => {
                 {pelicula?.vote_average} / 10 - {pelicula?.vote_count} votos
               </p>
             </Rating>
-            <Budget>Presupuesto: ${pelicula?.budget.toLocaleString()}</Budget>
+            <Budget>Presupuesto: ${pelicula?.budget?.toLocaleString()}</Budget>
+            <Revenue>Ingreso: ${pelicula?.revenue?.toLocaleString()}</Revenue>
+            <Companias>
+              <p>Companias productoras:</p>
+              <ul>
+                {pelicula?.production_companies?.map((compania, index) => (
+                  <li key={index}>{compania.name}</li>
+                ))}
+              </ul>
+            </Companias>
           </Datos>
         </WrapperDatos>
       </WrapperInfoPeli>
