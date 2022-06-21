@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import sinImagen from "../Imagenes/SinImagen.png"
+
 
 const EnlacePelicula = styled.a`
   @media screen and (min-width: 714px) {
@@ -21,7 +23,7 @@ const Poster = (props) => {
     <>
       <EnlacePelicula href={`pelicula/${props.id}`}>
         <ImgPelicula
-          src={`https://image.tmdb.org/t/p/original/${props.poster_path}`}
+          src={props.poster_path ? `https://image.tmdb.org/t/p/original/${props.poster_path}` : sinImagen}
         />
       </EnlacePelicula>
     </>
