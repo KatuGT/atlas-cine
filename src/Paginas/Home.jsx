@@ -46,7 +46,7 @@ const TextoTopPelis = styled.div`
   display: flex;
   gap: 0.5em;
   order: 3;
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 830px) {
     order: 0;
   }
 `;
@@ -55,7 +55,7 @@ const SearchBar = styled.input`
   border-radius: 1em;
   padding: 1em;
   order: 0;
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 830px) {
     margin-bottom: 0;
     order: 2;
   }
@@ -71,7 +71,7 @@ const WrapperRatingFilter = styled.div`
     font-weight: normal;
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 830px) {
     order: 1;
   }
 `;
