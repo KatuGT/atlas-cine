@@ -35,7 +35,7 @@ const CabezeraTopPelis = styled.div`
     font-size: 1.2em;
     font-weight: 700;
   }
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 830px) {
     flex-direction: row;
     align-items: center;
   }
@@ -111,7 +111,7 @@ const Home = () => {
   const [query, setQuery] = useState("");
   // STAR RATING
   const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null)
+  const [hover, setHover] = useState(null);
 
   useEffect(() => {
     try {
@@ -168,7 +168,7 @@ const Home = () => {
 
                     <IconoStrella
                       className="fa-solid fa-star"
-                      color={valorRating <= ( hover || rating) ? "yellow" : ""}
+                      color={valorRating <= (hover || rating) ? "yellow" : ""}
                       onMouseEnter={() => setHover(valorRating)}
                       onMouseLeave={() => setHover(null)}
                     ></IconoStrella>
@@ -200,8 +200,7 @@ const Home = () => {
               </>
             ) : (
               <Poster
-              id={pelicula?.id}
-
+                id={pelicula?.id}
                 poster_path={pelicula?.poster_path}
                 key={index * Math.random()}
               />
