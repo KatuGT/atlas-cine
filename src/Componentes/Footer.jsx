@@ -8,6 +8,7 @@ const WrapperFooter = styled.footer`
   color: #fff;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 0.5em;
   @media screen and (min-width: 700px) {
     padding: 2em;
