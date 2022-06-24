@@ -9,6 +9,7 @@ const WrapperNav = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #fea130;
+  z-index: 1000;
 
   @media screen and (min-width: 980px) {
   justify-content: space-around;
