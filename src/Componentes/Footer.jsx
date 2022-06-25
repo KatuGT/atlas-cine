@@ -8,12 +8,16 @@ const WrapperFooter = styled.footer`
   color: #fff;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: stretch;
   gap: 0.5em;
   @media screen and (min-width: 700px) {
+  box-sizing: border-box;
+
     padding: 2em;
+    align-items: flex-end;
     flex-direction: row;
     justify-content: space-between;
+
   }
 
   @media screen and (min-width: 1000px){
@@ -22,17 +26,21 @@ const WrapperFooter = styled.footer`
 `;
 
 const Columna = styled.div`
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 0.5em;
   @media screen and (min-width: 700px) {
     flex-direction: column;
-    gap: 1em;
+   gap: 1em;
   }
 `;
 
 const Contenido = styled.div`
+  box-sizing: border-box;
+
   text-align: right;
   display: flex;
   flex-direction: column;

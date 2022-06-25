@@ -32,7 +32,7 @@ const WrapperTitulos = styled.div`
 `;
 
 const Titulo = styled.h1`
-  font-size: 10em;
+  font-size: max(10em, 9em);
   margin: 0;
 `;
 
